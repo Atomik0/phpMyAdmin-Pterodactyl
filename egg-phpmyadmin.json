@@ -10,7 +10,7 @@
     "description": "phpMyAdmin for the Pterodactyl panel.",
     "features": null,
     "images": [
-        "registry.gitlab.com\/Atomik0\/phpmyadmin-pterodactyl"
+        "ghcr.io\/Atomik0\/phpMyAdmin-Pterodactyl"
     ],
     "file_denylist": [],
     "startup": "{{STARTUP_CMD}}",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n\r\ncd \/mnt\/server\r\n\r\napk --update add git\r\n\r\ngit clone https:\/\/gitlab.com\/tmunsch\/pterodactyl-wordpress .\/temp\r\n\r\ncp -r .\/temp\/nginx \/mnt\/server\/\r\ncp -r .\/temp\/php-fpm \/mnt\/server\/\r\ncp -r .\/temp\/webroot \/mnt\/server\/\r\ncp .\/temp\/start.sh \/mnt\/server\/\r\n\r\nrm \/mnt\/server\/webroot\/index.php\r\ncp -a \/mnt\/server\/wordpress\/. \/mnt\/server\/webroot\/\r\nrm -rf \/mnt\/server\/wordpress\/\r\n\r\nchmod +x \/mnt\/server\/start.sh\r\n\r\nrm -rf .\/temp\r\n\r\ncd \/mnt\/server\/webroot\/\r\nwget http:\/\/wordpress.org\/latest.tar.gz\r\ntar xfz latest.tar.gz\r\nmv wordpress\/* .\/\r\nrmdir .\/wordpress\/\r\nrm -f latest.tar.gz",
+            "script": "#!\/bin\/ash\r\n\r\ncd \/mnt\/server\r\n\r\napk --update add git\r\n\r\ngit clone https:\/\/github.com\/Atomik0\/phpMyAdmin-Pterodactyl .\/temp\r\n\r\ncp -r .\/temp\/nginx \/mnt\/server\/\r\ncp -r .\/temp\/php-fpm \/mnt\/server\/\r\ncp -r .\/temp\/webroot \/mnt\/server\/\r\ncp .\/temp\/start.sh \/mnt\/server\/\r\n\r\nrm \/mnt\/server\/webroot\/index.php\r\ncp -a \/mnt\/server\/phpmyadmin\/. \/mnt\/server\/webroot\/\r\nrm -rf \/mnt\/server\/phpmyadmin\/\r\n\r\nchmod +x \/mnt\/server\/start.sh\r\n\r\nrm -rf .\/temp\r\n\r\ncd \/mnt\/server\/webroot\/\r\nwget https:\/\/files.phpmyadmin.net\/phpMyAdmin\/5.2.0\/phpMyAdmin-5.2.0-all-languages.tar.gz\r\ntar xfz phpMyAdmin-5.2.0-all-languages.tar.gz\r\nmv phpmyadmin\/* .\/\r\nrmdir .\/phpmyadmin\/\r\nrm -f phpMyAdmin-5.2.0-all-languages.tar.gz",
             "container": "alpine:latest",
             "entrypoint": "ash"
         }
